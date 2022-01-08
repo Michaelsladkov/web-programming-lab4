@@ -20,6 +20,8 @@ import { FormsModule } from '@angular/forms';
 import {PasswordModule} from 'primeng/password'
 import {InputTextModule} from 'primeng/inputtext';
 import { SessionRepositoryService } from './shared/session-repository.service';
+import { ShotsRepositoryService } from './shared/shots-repository.service';
+import { RValueStorageService } from './shared/r-value-storage.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { SessionRepositoryService } from './shared/session-repository.service';
     InputTextModule
   ],
   providers: [ {provide: LocationStrategy, useClass: PathLocationStrategy}, 
-    {provide: LoginGuard, useClass: LoginGuard}, ShotsService, LoginService, SessionRepositoryService],
+    {provide: LoginGuard, useClass: LoginGuard}, ShotsService, LoginService, SessionRepositoryService, ShotsRepositoryService,
+      RValueStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

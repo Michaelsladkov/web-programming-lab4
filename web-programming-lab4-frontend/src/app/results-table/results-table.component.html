@@ -1,1 +1,18 @@
-<p>results-table works!</p>
+<table class="results-table">
+    <tr>
+        <th>X</th>
+        <th>Y</th>
+        <th>R</th>
+        <th>Время запроса</th>
+        <th>Время обработки, с</th>
+        <th>Попал?</th>
+    </tr>
+    <tr *ngFor="let shot of getShotsArray()">
+        <td>{{shot.x}}</td>
+        <td>{{shot.y}}</td>
+        <td>{{shot.r}}</td>
+        <td>{{shot.date}}</td>
+        <td>{{shot.processing}}</td>
+        <td>{{shot.success}}</td>
+    </tr>
+</table>

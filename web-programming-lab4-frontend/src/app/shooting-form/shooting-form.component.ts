@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShotResponse } from '../shared/model/response.shot.model';
+import { RValueStorageService } from '../shared/r-value-storage.service';
+import { ShotsRepositoryService } from '../shared/shots-repository.service';
 import { ShotsService } from '../shared/shots.service';
 
 @Component({
@@ -8,27 +10,26 @@ import { ShotsService } from '../shared/shots.service';
   styleUrls: ['./shooting-form.component.css']
 })
 export class ShootingFormComponent implements OnInit {
-  xValues : boolean[] = [false, false, false, false, false, false, false, false, false];
-  rValues : boolean[] = [false, false, false, false, false, false, false, false, false];
-  xValue : number | null = null;
-  yValue : number | null = null;
-  rValue : number | null = null;
-  errors : string = "";
-  yValueStr : string = "";
-  shots: ShotResponse[] = [];
+  xValues: boolean[] = [false, false, false, false, false, false, false, false, false];
+  rValues: boolean[] = [false, false, false, false, false, false, false, false, false];
+  xValue: number | null = null;
+  yValue: number | null = null;
+  rValue: number | null = null;
+  errors: string = "";
+  yValueStr: string = "";
+  private shotsRepository: ShotsRepositoryService;
 
-  xChanged(x : number) : void {
+  xChanged(x: number): void {
     this.errors = "";
-    for(let i = 0; i < 9; i++) {
+    for (let i = 0; i < 9; i++) {
       if (i != x + 3) this.xValues[i] = false;
     }
-    console.log(this.xValues);
-    this.xValue = this.xValues[x+3] ? x : null;
+    this.xValue = this.xValues[x + 3] ? x : null;
   }
 
-  rChanged(r : number) : void {
+  rChanged(r: number): void {
     this.errors = "";
-    for(let i = 0; i < 9; i++) {
+    for (let i = 0; i < 9; i++) {
       if (i != r + 3) this.rValues[i] = false;
     }
     if (r <= 0) {
@@ -36,13 +37,14 @@ export class ShootingFormComponent implements OnInit {
       this.rValue = r;
       return;
     }
-    this.rValue = this.rValues[r+3] ? r : null;
+    this.rValue = this.rValues[r + 3] ? r : null;
+    this.rStorage.setR(this.rValue);
   }
 
-  checkY() : boolean {
+  checkY(): boolean {
     this.errors = "";
     if (this.yValueStr === "" ||
-        ((!this.yValueStr.match(/^-?[0-9]*$/)) && (!this.yValueStr.match(/^-?[0-9]*[\.,][0-9]+$/)))){
+      ((!this.yValueStr.match(/^-?[0-9]*$/)) && (!this.yValueStr.match(/^-?[0-9]*[\.,][0-9]+$/)))) {
       this.errors = "Введите число Y";
       return false;
     }
@@ -58,7 +60,7 @@ export class ShootingFormComponent implements OnInit {
     return true;
   }
 
-  private validate() : boolean {
+  private validate(): boolean {
     if (this.rValue == null) {
       this.errors = "Введите R"
       return false;
@@ -74,35 +76,37 @@ export class ShootingFormComponent implements OnInit {
     return this.checkY();
   }
 
-  submitShot() : void {
-    if (!this.validate) return;
+  submitShot(): void {
+    if (!this.validate()) return;
     if (this.xValue == null || this.yValue == null || this.rValue == null) return;
     this.shotService.sendShot(this.xValue, this.yValue, this.rValue).subscribe((rep: ShotResponse) => {
-      console.log(rep);
-      this.shots.push(rep);
-      console.log(this.shots);
+      this.shotsRepository.putShot(rep);
     });
   }
 
-  clearResults() : void {
+  clearResults(): void {
     this.shotService.clear().subscribe((data) => {
-      console.log("cleared")
       this.fetch();
     });
 
   }
 
   private fetch(): void {
-    this.shotService.fetchShots().subscribe((data: ShotResponse[])  => {
-      this.shots = data
-      console.log(this.shots);
+    this.shotService.fetchShots().subscribe((data: ShotResponse[]) => {
+      this.shotsRepository.setShots(data);
+      console.log(this.shotsRepository.getShots());
     });
   }
 
-  constructor(private shotService : ShotsService) { }
+  constructor(private shotService: ShotsService, repo: ShotsRepositoryService, private rStorage: RValueStorageService) {
+    this.shotsRepository = repo;
+  }
 
   ngOnInit(): void {
     this.fetch();
+    this.rValue = 3;
+    this.rStorage.setR(this.rValue);
+    this.rValues[6] = true;
   }
 
 }

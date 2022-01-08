@@ -42,9 +42,7 @@ public class AuthController {
         if (realUser != null) return ResponseEntity.badRequest().body("There is already user with this name");
         realUser = new User();
         realUser.setName(user.getUsername());
-        System.out.println(user.getPassword());
         realUser.setPasswordHash(passwordEncoder.encode(user.getPassword()));
-        System.out.println(realUser.getPasswordHash());
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/auth/register").toString());
         userServiceImpl.saveUser(realUser);
         return ResponseEntity.created(uri).build();

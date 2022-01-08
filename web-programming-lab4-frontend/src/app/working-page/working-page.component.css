@@ -1,9 +1,30 @@
 #form-container {
+    margin-left: 11%;;
     float: left;
     width: 30%;
 }
 
 #image-container {
     float: right;
-    width: 60%;
+    margin-right: 11%;
+}
+
+.navigation-button {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 11%;
+    width: 21%;
+    height: 50px;
+    background: transparent;
+    border: 4px solid black;
+    border-radius: 3px;
+    float: left;
+}
+
+.navigation-button:hover {
+    box-shadow: 0 0 2px 2px darkslategray;
+}
+
+#controlls {
+    margin-top: 50px;
 }
