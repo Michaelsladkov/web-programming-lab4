@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+    --gradient-first-color: rgb(85, 85, 189);
+    --gradient-second-color: rgb(217, 115, 255);
+}
+
+body {
+    background: linear-gradient(60deg, var(--gradient-first-color), var(--gradient-second-color));
+    min-height: 97vh;
+    font-family: Bahnschrift, serif;
+}
+
+.content {
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    height: fit-content;
+}
+
+.errors {
+    height: 24px;
+}
+
+.container {
+    border: black solid 4px;
+    border-radius: 4px;
+    width: fit-content;
+    height: fit-content;
+    margin: 20px 10px;
+    display: inline-block;
+    padding: 10px;
+}

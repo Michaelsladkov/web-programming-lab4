@@ -1,0 +1,111 @@
+.checkbox-block {
+    display: inline-block;
+    text-align: center;
+    width: 20px;
+}
+
+.field {
+    margin-bottom: 7px;
+    margin-top: 20px;
+    min-width: 200px;
+}
+
+.text-field {
+    border-radius: 2px;
+    border: 2px solid black;
+    padding: 3px;
+    background: transparent;
+}
+
+.text-field:active {
+    border-color: darkblue;
+}
+
+input {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+.radio, .checkbox {
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: 2px solid black;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+    padding: 5px;
+    border-radius: 2px;
+    display: inline-block;
+    position: relative;
+}
+
+.radio:hover, .checkbox:hover {
+    background-color: #da9bff;
+}
+
+.radio:checked, .checkbox:checked {
+    background-color: black;
+}
+
+#submit-button {
+    -webkit-appearance: none;
+    border: 2px solid black;
+    border-radius: 4px;
+    font-weight: bolder;
+    padding: 2px;
+    background: transparent;
+}
+
+#form-container {
+    width: 30%;
+}
+
+#submit-button {
+    padding: 10px;
+    font-size: 20px;
+    font-family: inherit;
+    border: 2px solid black;
+    border-radius: 4px;
+    background: red;
+    float: right;
+}
+
+#submit-button:hover {
+    background: #8e0e0e;
+}
+
+#clear-button {
+    padding: 10px;
+    font-size: 20px;
+    font-family: inherit;
+    border: 2px solid black;
+    border-radius: 4px;
+    background: transparent;
+    float: left;
+}
+
+#clear-button:hover {
+    background: rgba(119, 15, 155, 0.57);
+}
+
+#x-value {
+    height: 50px;
+    width: 30%;
+}
+
+#error-display {
+    color: #7e0a0a;
+    font-weight: bolder;
+    font-size: 15px;
+    padding: 0 0 0 4%;
+    margin-top: 40px;
+    height: fit-content;
+    width: 100%;
+}
+
+#buttons {
+    width: 100%;
+    height: fit-content;
+}
+
+.container {
+    min-width: 225px;
+}

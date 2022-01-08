@@ -1,0 +1,9 @@
+#form-container {
+    float: left;
+    width: 30%;
+}
+
+#image-container {
+    float: right;
+    width: 60%;
+}

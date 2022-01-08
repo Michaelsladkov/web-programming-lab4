@@ -1,0 +1,47 @@
+.text-field {
+    border-radius: 2px;
+    border: 2px solid black;
+    padding: 3px;
+    background: transparent;
+}
+
+.text-field:active {
+    border-color: darkblue;
+}
+
+button {
+    -webkit-appearance: none;
+    border: 2px solid black;
+    border-radius: 4px;
+    font-weight: bolder;
+    padding: 6px;
+    background: transparent;
+    margin: 5px;
+}
+
+button:hover {
+    background: rgba(119, 15, 155, 0.57);
+}
+
+.login-input-container {
+    float: right;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+#buttons {
+    margin-top: 10px;
+    margin-left: auto;
+    margin-top: auto;
+    padding: 5px;
+}
+
+#error-display {
+    color: #7e0a0a;
+    font-weight: bolder;
+    font-size: 15px;
+    padding: 0 0 0 4%;
+    margin: 4px;
+    height: fit-content;
+    width: 240px;
+}

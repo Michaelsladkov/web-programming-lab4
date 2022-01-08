@@ -1,0 +1,24 @@
+<div class="container">
+    <form>
+        <div id="login" class="login-input-container">
+            <label>
+                Логин:
+                <input autocomplete="off" maxlength="24" class="text-field" type="text" 
+                [(ngModel)]="login" [ngModelOptions]="{standalone: true}">
+            </label>
+        </div>
+        <br>
+        <div id="password" class="login-input-container">
+            <label>
+                Пароль:
+                <input autocomplete="off" maxlength="24" class="text-field" type="password" 
+                [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+            </label>
+        </div>
+        <div id="buttons">
+            <button (click)="logIn()" value="login">Войти</button>
+            <button (click)="register()" value="register">Зарегистрироваться</button>
+        </div>
+    </form>
+    <p id="error-display">{{errors}}</p>
+</div>
