@@ -40,4 +40,12 @@ public class ShotController {
         String author = UsernameDecoder.decodeUsername(token);
         return repository.findByAuthor(author).stream().map(ShotRepresentation::new).collect(Collectors.toList());
     }
+
+    @CrossOrigin
+    @DeleteMapping("/shot")
+    public void removeAll(HttpServletRequest request) {
+        String token = request.getHeader(AUTHORIZATION);
+        String author = UsernameDecoder.decodeUsername(token);
+        repository.deleteAllByAuthor(author);
+    }
 }

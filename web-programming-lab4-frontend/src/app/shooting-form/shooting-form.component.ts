@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ShotResponse } from '../shared/model/response.shot.model';
 import { ShotsService } from '../shared/shots.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class ShootingFormComponent implements OnInit {
   rValue : number | null = null;
   errors : string = "";
   yValueStr : string = "";
+  shots: ShotResponse[] = [];
 
   xChanged(x : number) : void {
     this.errors = "";
@@ -75,16 +77,32 @@ export class ShootingFormComponent implements OnInit {
   submitShot() : void {
     if (!this.validate) return;
     if (this.xValue == null || this.yValue == null || this.rValue == null) return;
-    this.shotService.sendShot(this.xValue, this.yValue, this.rValue).subscribe((rep) => console.log(rep));
+    this.shotService.sendShot(this.xValue, this.yValue, this.rValue).subscribe((rep: ShotResponse) => {
+      console.log(rep);
+      this.shots.push(rep);
+      console.log(this.shots);
+    });
   }
 
   clearResults() : void {
-    
+    this.shotService.clear().subscribe((data) => {
+      console.log("cleared")
+      this.fetch();
+    });
+
+  }
+
+  private fetch(): void {
+    this.shotService.fetchShots().subscribe((data: ShotResponse[])  => {
+      this.shots = data
+      console.log(this.shots);
+    });
   }
 
   constructor(private shotService : ShotsService) { }
 
   ngOnInit(): void {
+    this.fetch();
   }
 
 }

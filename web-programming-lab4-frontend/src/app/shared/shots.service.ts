@@ -22,7 +22,29 @@ export class ShotsService {
       'Content-Type': 'application/json',
       'username' : this.sessionRepository.getUsername(),
       'authorization' : this.sessionRepository.getToken()
-    }
-  });
+      }
+    });
+  }
+
+  public fetchShots() : Observable<ShotResponse[]> {
+    return this.httpClient.get<ShotResponse[]>(this.url, {
+      responseType: 'json',
+      headers: {
+      'Content-Type': 'application/json',
+      'username' : this.sessionRepository.getUsername(),
+      'authorization' : this.sessionRepository.getToken()
+      }
+    });
+  }
+
+  public clear()  : Observable<any> {
+    return this.httpClient.delete<ShotResponse[]>(this.url, {
+      responseType: 'json',
+      headers: {
+      'Content-Type': 'application/json',
+      'username' : this.sessionRepository.getUsername(),
+      'authorization' : this.sessionRepository.getToken()
+      }
+    });
   }
 }
