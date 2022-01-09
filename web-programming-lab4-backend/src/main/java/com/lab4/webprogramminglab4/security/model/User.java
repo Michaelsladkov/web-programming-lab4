@@ -25,6 +25,6 @@ public class User {
 
     @Override
     public int hashCode() {
-        return 0;
+        return name.hashCode()*1000 + passwordHash.hashCode();
     }
 }

@@ -103,10 +103,11 @@ export class ShootingFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetch();
     this.rValue = 3;
     this.rStorage.setR(this.rValue);
     this.rValues[6] = true;
+    console.log("fetching");
+    this.fetch();
   }
 
 }

@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     this.errors = "";
     if (!this.validate()) return;
     this.loginService.logIn(this.login, this.password)
-        .subscribe((next) => this.router.navigate(['shots']), error=>this.setLoginError());
+        .subscribe((next) => 0, error=>this.setLoginError());
   }
 
   public register() : void {

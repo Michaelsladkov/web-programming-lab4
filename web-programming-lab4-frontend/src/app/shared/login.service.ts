@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { catchError, Observable, throwError } from 'rxjs';
 import {User} from 'src/app/shared/model/user.model';
 import { SessionRepositoryService } from './session-repository.service';
@@ -12,7 +13,7 @@ export class LoginService {
   private loginUrl : string = "http://localhost:8080/auth/login";
   private registerUrl : string = "http://localhost:8080/auth/register";
 
-  constructor(private httpClient : HttpClient, private sessionRepository : SessionRepositoryService) { }
+  constructor(private httpClient : HttpClient, private sessionRepository : SessionRepositoryService, private router: Router) { }
 
   private loggedIn : boolean = false;
 
@@ -32,6 +33,7 @@ export class LoginService {
     obs.subscribe((data) => {
       this.sessionRepository.saveSession(data.access_token, login);
       this.loggedIn = true;
+      this.router.navigate(['shots']);
     });
     this.loggedIn = true;
     return obs;
@@ -44,9 +46,6 @@ export class LoginService {
     console.log(body);
     let obs =  this.httpClient
         .post(this.registerUrl, body, {responseType: 'json', headers: {'Content-Type': 'application/json'}});
-    obs.subscribe((data) => {
-      this.loggedIn = true;
-    })
     return obs;
   }
 

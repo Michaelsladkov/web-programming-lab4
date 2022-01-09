@@ -50,7 +50,6 @@ export class DisplayComponent implements OnInit, Updatable {
   ngOnInit(): void {
     this.rStorage.subscribe(this);
     this.updatePath(3);
-    console.log("qq");
   }
 
 }

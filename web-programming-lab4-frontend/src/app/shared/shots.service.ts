@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, EMPTY, Observable, retry } from 'rxjs';
 import { ShotRequest } from './model/request.shot.model';
 import { ShotResponse } from './model/response.shot.model';
 import { SessionRepositoryService } from './session-repository.service';
@@ -27,6 +27,7 @@ export class ShotsService {
   }
 
   public fetchShots() : Observable<ShotResponse[]> {
+    console.log(this.sessionRepository.getToken());
     return this.httpClient.get<ShotResponse[]>(this.url, {
       responseType: 'json',
       headers: {
@@ -34,7 +35,7 @@ export class ShotsService {
       'username' : this.sessionRepository.getUsername(),
       'authorization' : this.sessionRepository.getToken()
       }
-    });
+    }).pipe(retry(3), catchError(() => EMPTY));
   }
 
   public clear()  : Observable<any> {
